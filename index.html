@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrobotLabs | AI Automatizacija Korisničkih Upita, Termina i E-pošte</title>
+
+    <!-- Favicon (SVG data URI u stilu CrobotLabs logotipa) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23041f22'/%3E%3Crect x='1' y='1' width='30' height='30' rx='7' fill='none' stroke='%2314b8a6' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Cpath d='M10 12h.01M16 12h.01M22 12h.01M11 18H8a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2v7a2 2 0 01-2 2h-6l-4 4v-4z' fill='none' stroke='%235eead4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     
     <!-- Osnovne SEO meta oznake -->
     <meta name="description" content="CrobotLabs razvija pouzdane AI asistente za automatizaciju korisničkih upita, dogovaranje sastanaka u kalendaru i trijažu e-pošte za tvrtke u Hrvatskoj. Uredna komunikacija uz ljudski nadzor.">
@@ -294,9 +297,9 @@
 
     <!-- Navigacija -->
     <header class="sticky top-0 z-40 w-full theme-header backdrop-blur-xl border-b">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-4">
             <!-- Logo / Naziv -->
-            <a href="#" aria-label="CrobotLabs početna stranica" class="flex items-center space-x-2.5 group shrink-0">
+            <a href="#" id="brand-home-link" aria-label="CrobotLabs početna stranica" class="flex items-center space-x-2.5 group shrink-0">
                 <div class="w-8 h-8 rounded-lg theme-accent-badge border flex items-center justify-center transition-transform group-hover:scale-95">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
@@ -306,29 +309,39 @@
             </a>
 
             <!-- Desktop izbornik -->
-            <nav aria-label="Glavna navigacija" class="hidden lg:flex items-center space-x-7 text-sm font-medium theme-text-secondary">
-                <a href="#analiza" class="hover:opacity-80 transition-opacity">Usporedba vremena</a>
-                <a href="#podrucja" class="hover:opacity-80 transition-opacity">Rješenja</a>
-                <a href="https://crobotsystems.github.io/home/ava.html" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">Demo</a>
-                <a href="#pitanja" class="hover:opacity-80 transition-opacity">Česta pitanja</a>
-                <a href="#kontakt" class="hover:opacity-80 transition-opacity">Kontakt</a>
+            <nav id="desktop-nav" aria-label="Glavna navigacija" class="hidden lg:flex items-center space-x-7 text-sm font-medium theme-text-secondary">
+                <a href="#analiza" data-i18n="nav_analysis" class="hover:opacity-80 transition-opacity">Usporedba vremena</a>
+                <a href="#podrucja" data-i18n="nav_solutions" class="hover:opacity-80 transition-opacity">Rješenja</a>
+                <a href="https://crobotsystems.github.io/home/ava.html" target="_blank" rel="noopener noreferrer" data-i18n="nav_demo" class="hover:opacity-80 transition-opacity">Demo</a>
+                <a href="#pitanja" data-i18n="nav_faq" class="hover:opacity-80 transition-opacity">Česta pitanja</a>
+                <a href="#kontakt" data-i18n="nav_contact" class="hover:opacity-80 transition-opacity">Kontakt</a>
             </nav>
 
-            <!-- Kontrole desno: Theme Switcher (Light / Dark) + mobilni gumb -->
-            <div class="flex items-center space-x-2.5">
+            <!-- Kontrole desno: Language Switcher (HR / EN) + Theme Switcher (Light / Dark) + mobilni gumb -->
+            <div class="flex items-center space-x-2 sm:space-x-2.5">
+                <!-- Language Switcher (HR / EN) -->
+                <div id="lang-switcher" role="group" aria-label="Odabir jezika / Language selector" class="inline-flex items-center p-1 rounded-xl theme-subtle border text-xs font-mono font-medium">
+                    <button type="button" data-lang-choice="hr" class="lang-switch-btn px-2 py-1.5 rounded-lg transition-all" title="Hrvatski">
+                        HR
+                    </button>
+                    <button type="button" data-lang-choice="en" class="lang-switch-btn px-2 py-1.5 rounded-lg transition-all" title="English">
+                        EN
+                    </button>
+                </div>
+
                 <!-- Theme Switcher (Light / Dark AMOLED) -->
-                <div role="group" aria-label="Odabir teme prikaza" class="inline-flex items-center p-1 rounded-xl theme-subtle border text-xs font-medium">
-                    <button type="button" data-theme-choice="light" class="theme-switch-btn flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg transition-all" title="Svijetla tema">
+                <div id="theme-switcher" role="group" aria-label="Odabir teme prikaza" class="inline-flex items-center p-1 rounded-xl theme-subtle border text-xs font-medium">
+                    <button type="button" data-theme-choice="light" class="theme-switch-btn flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg transition-all" title="Light theme">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
-                        <span>Light</span>
+                        <span data-i18n="theme_light">Light</span>
                     </button>
-                    <button type="button" data-theme-choice="dark" class="theme-switch-btn flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg transition-all" title="Tamna tema">
+                    <button type="button" data-theme-choice="dark" class="theme-switch-btn flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg transition-all" title="Dark theme">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
-                        <span>Dark</span>
+                        <span data-i18n="theme_dark">Dark</span>
                     </button>
                 </div>
 
@@ -343,11 +356,11 @@
 
         <!-- Mobilni padajući izbornik -->
         <nav id="mobile-menu" aria-label="Mobilna navigacija" class="hidden lg:hidden border-b theme-header backdrop-blur-xl px-4 pt-2 pb-4 space-y-1.5 text-sm font-medium">
-            <a href="#analiza" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Usporedba vremena</a>
-            <a href="#podrucja" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Rješenja</a>
-            <a href="#pristup" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Način rada</a>
-            <a href="#pitanja" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Česta pitanja</a>
-            <a href="#kontakt" class="block py-2.5 px-3 rounded-lg theme-accent-badge border text-center mt-2">Kontakt putem e-pošte</a>
+            <a href="#analiza" data-i18n="nav_analysis" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Usporedba vremena</a>
+            <a href="#podrucja" data-i18n="nav_solutions" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Rješenja</a>
+            <a href="#pristup" data-i18n="nav_approach" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Način rada</a>
+            <a href="#pitanja" data-i18n="nav_faq" class="block py-2.5 px-3 rounded-lg theme-text-secondary hover:opacity-80">Česta pitanja</a>
+            <a href="#kontakt" data-i18n="nav_contact_email" class="block py-2.5 px-3 rounded-lg theme-accent-badge border text-center mt-2">Kontakt putem e-pošte</a>
         </nav>
     </header>
 
@@ -362,20 +375,20 @@
                     <div class="lg:col-span-6">
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full theme-surface border text-xs font-mono theme-accent-text mb-6">
                             <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
-                            <span>AI Automatizacija &bull; Kalendar &bull; E-pošta</span>
+                            <span data-i18n="hero_pill">AI Automatizacija &bull; Kalendar &bull; E-pošta</span>
                         </div>
-                        <h1 id="hero-heading" class="text-3xl sm:text-4xl lg:text-[42px] font-semibold theme-text-primary tracking-tight leading-[1.16] mb-5">
+                        <h1 id="hero-heading" data-i18n="hero_title" class="text-3xl sm:text-4xl lg:text-[42px] font-semibold theme-text-primary tracking-tight leading-[1.16] mb-5">
                             Uredna komunikacija i dogovaranje termina bez ručnog prepisivanja.
                         </h1>
-                        <p class="text-base sm:text-lg theme-text-secondary leading-relaxed mb-8 font-normal">
+                        <p data-i18n="hero_subtitle" class="text-base sm:text-lg theme-text-secondary leading-relaxed mb-8 font-normal">
                             CrobotLabs izrađuje diskretne AI asistente koji razvrstavaju pristiglu e-poštu, pripremaju točne odgovore na korisničke upite i usklađuju sastanke s vašim kalendarom — uz potpuni ljudski nadzor.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3.5">
-                            <button type="button" id="open-call-from-hero"
+                            <button type="button" id="open-call-from-hero" data-i18n="hero_cta_primary"
                                class="inline-flex justify-center items-center px-5 py-3 rounded-xl theme-btn-primary text-sm font-semibold transition-all shadow-sm">
                                 Zakažite poziv s Crobot timom
                             </button>
-                            <a href="#analiza" 
+                            <a href="#analiza" data-i18n="hero_cta_secondary"
                                class="inline-flex justify-center items-center px-5 py-3 rounded-xl theme-surface border theme-text-primary text-sm font-medium hover:opacity-85 transition-opacity">
                                 Pogledajte prikaz uštede sati
                             </a>
@@ -384,16 +397,16 @@
                         <!-- Tri suzdržane ključne točke -->
                         <div class="mt-9 pt-7 border-t theme-border grid grid-cols-3 gap-4">
                             <div>
-                                <p class="text-xs font-mono theme-text-muted mb-1">Korisnički upiti</p>
-                                <p class="text-sm font-medium theme-text-primary">Nacrt odgovora spreman za pregled</p>
+                                <p data-i18n="hero_k1_label" class="text-xs font-mono theme-text-muted mb-1">Korisnički upiti</p>
+                                <p data-i18n="hero_k1_val" class="text-sm font-medium theme-text-primary">Nacrt odgovora spreman za pregled</p>
                             </div>
                             <div>
-                                <p class="text-xs font-mono theme-text-muted mb-1">Termini</p>
-                                <p class="text-sm font-medium theme-text-primary">Izravan upis u Google / Outlook</p>
+                                <p data-i18n="hero_k2_label" class="text-xs font-mono theme-text-muted mb-1">Termini</p>
+                                <p data-i18n="hero_k2_val" class="text-sm font-medium theme-text-primary">Izravan upis u Google / Outlook</p>
                             </div>
                             <div>
-                                <p class="text-xs font-mono theme-text-muted mb-1">E-pošta</p>
-                                <p class="text-sm font-medium theme-text-primary">Automatsko označavanje i sažeci</p>
+                                <p data-i18n="hero_k3_label" class="text-xs font-mono theme-text-muted mb-1">E-pošta</p>
+                                <p data-i18n="hero_k3_val" class="text-sm font-medium theme-text-primary">Automatsko označavanje i sažeci</p>
                             </div>
                         </div>
                     </div>
@@ -406,15 +419,15 @@
                                     <span class="w-2.5 h-2.5 rounded-full bg-zinc-600/50"></span>
                                     <span class="w-2.5 h-2.5 rounded-full bg-zinc-600/50"></span>
                                     <span class="w-2.5 h-2.5 rounded-full bg-zinc-600/50"></span>
-                                    <span class="text-xs font-mono theme-text-muted pl-2">komunikacija_i_termini.flow</span>
+                                    <span data-i18n="flow_filename" class="text-xs font-mono theme-text-muted pl-2">komunikacija_i_termini.flow</span>
                                 </div>
-                                <span class="text-xs font-mono theme-accent-badge border px-2 py-0.5 rounded">Nadzirani rad</span>
+                                <span data-i18n="flow_badge" class="text-xs font-mono theme-accent-badge border px-2 py-0.5 rounded">Nadzirani rad</span>
                             </div>
                             <!-- D3 SVG kontejner -->
-                            <div id="flow-chart-container" class="w-full h-64 sm:h-72" role="img" aria-label="Dijagram toka AI automatizacije od ulaznog e-maila i web upita do prijedloga termina u kalendaru i nacrta odgovora"></div>
+                            <div id="flow-chart-container" class="w-full h-64 sm:h-72" role="img" aria-label="Dijagram toka AI automatizacije"></div>
                             <figcaption class="mt-3 pt-3 border-t theme-border flex items-center justify-between text-xs theme-text-muted">
-                                <span>Ulaz: E-mail / Web obrazac</span>
-                                <span>Izlaz: Kalendar &amp; Nacrt odgovora</span>
+                                <span data-i18n="flow_cap_in">Ulaz: E-mail / Web obrazac</span>
+                                <span data-i18n="flow_cap_out">Izlaz: Kalendar &amp; Nacrt odgovora</span>
                             </figcaption>
                         </figure>
                     </div>
@@ -427,23 +440,23 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                     <div class="max-w-2xl">
-                        <h2 id="analiza-heading" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">
+                        <h2 id="analiza-heading" data-i18n="analysis_title" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">
                             Gdje odlaze sati u svakodnevnoj komunikaciji
                         </h2>
-                        <p class="theme-text-secondary text-sm sm:text-base leading-relaxed">
+                        <p data-i18n="analysis_subtitle" class="theme-text-secondary text-sm sm:text-base leading-relaxed">
                             Velik dio radnog tjedna troši se na ponavljajuća pitanja, provjeru slobodnih termina i razvrstavanje sandučića. Odaberite proces za prikaz realistične promjene strukture rada.
                         </p>
                     </div>
 
                     <!-- Kontrole za interaktivni graf -->
                     <div class="flex flex-wrap gap-2" id="scenario-buttons" role="group" aria-label="Odabir poslovnog procesa za grafikon">
-                        <button type="button" data-scenario="upiti" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
+                        <button type="button" data-scenario="upiti" data-i18n="sc_inquiries" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
                             Korisnički upiti
                         </button>
-                        <button type="button" data-scenario="termini" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
+                        <button type="button" data-scenario="termini" data-i18n="sc_scheduling" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
                             Dogovaranje termina
                         </button>
-                        <button type="button" data-scenario="email" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
+                        <button type="button" data-scenario="email" data-i18n="sc_email" class="scenario-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all">
                             E-mail trijaža i praćenje
                         </button>
                     </div>
@@ -461,18 +474,18 @@
                                 </div>
                                 <div class="flex items-center space-x-4 text-xs">
                                     <span class="flex items-center theme-text-secondary">
-                                        <span class="w-2.5 h-2.5 rounded-sm mr-1.5" style="background-color: var(--chart-bar-muted);"></span>Ručni rad
+                                        <span class="w-2.5 h-2.5 rounded-sm mr-1.5" style="background-color: var(--chart-bar-muted);"></span><span data-i18n="legend_manual">Ručni rad</span>
                                     </span>
                                     <span class="flex items-center theme-accent-text">
-                                        <span class="w-2.5 h-2.5 rounded-sm mr-1.5" style="background-color: var(--accent);"></span>Uz AI podršku
+                                        <span class="w-2.5 h-2.5 rounded-sm mr-1.5" style="background-color: var(--accent);"></span><span data-i18n="legend_ai">Uz AI podršku</span>
                                     </span>
                                 </div>
                             </div>
-                            <div id="bar-chart-container" class="w-full h-64" role="img" aria-label="Stupčasti grafikon usporedbe tjednih sati ručnog rada i rada uz AI podršku"></div>
+                            <div id="bar-chart-container" class="w-full h-64" role="img" aria-label="Stupčasti grafikon usporedbe tjednih sati"></div>
                         </div>
                         <div class="mt-4 pt-4 border-t theme-border flex items-center justify-between text-xs theme-text-muted">
-                            <span>* Okvirni prikaz temeljen na tipičnim uredskim tokovima.</span>
-                            <span class="font-mono">Jedinica: sati / tjedno</span>
+                            <span data-i18n="bar_footnote">* Okvirni prikaz temeljen na tipičnim uredskim tokovima.</span>
+                            <span data-i18n="bar_unit" class="font-mono">Jedinica: sati / tjedno</span>
                         </div>
                     </article>
 
@@ -480,12 +493,12 @@
                     <article class="lg:col-span-5 theme-surface border rounded-2xl p-6 flex flex-col justify-between shadow-sm">
                         <div>
                             <div class="mb-6">
-                                <h3 class="text-base font-semibold theme-text-primary">Postupno uhodavanje kroz 8 dana</h3>
-                                <p class="text-xs theme-text-secondary mt-0.5">Rasterecenje manualnih zadataka</p>
+                                <h3 data-i18n="line_title" class="text-base font-semibold theme-text-primary">Postupno uhodavanje kroz 8 dana</h3>
+                                <p data-i18n="line_subtitle" class="text-xs theme-text-secondary mt-0.5">Rasterecenje manualnih zadataka</p>
                             </div>
-                            <div id="line-chart-container" class="w-full h-64" role="img" aria-label="Linijski grafikon smanjenja potrebe za ručnom doradom AI prijedloga tijekom osam dana"></div>
+                            <div id="line-chart-container" class="w-full h-64" role="img" aria-label="Linijski grafikon smanjenja potrebe za ručnom doradom"></div>
                         </div>
-                        <div class="mt-4 pt-4 border-t theme-border text-xs theme-text-secondary leading-relaxed">
+                        <div data-i18n="line_note" class="mt-4 pt-4 border-t theme-border text-xs theme-text-secondary leading-relaxed">
                             U prvim danima sustav radi isključivo u načinu pripreme nacrta (draft). Tek kada tim potvrdi točnost pravila, rutinski koraci se automatiziraju.
                         </div>
                     </article>
@@ -497,8 +510,8 @@
         <section id="podrucja" class="py-16 sm:py-24 border-b theme-border" aria-labelledby="podrucja-heading">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-2xl mb-12">
-                    <h2 id="podrucja-heading" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">Tri stupa svakodnevne automatizacije</h2>
-                    <p class="theme-text-secondary text-sm sm:text-base leading-relaxed">
+                    <h2 id="podrucja-heading" data-i18n="solutions_title" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">Tri stupa svakodnevne automatizacije</h2>
+                    <p data-i18n="solutions_subtitle" class="theme-text-secondary text-sm sm:text-base leading-relaxed">
                         Spajamo se na vaše postojeće kanale komunikacije bez potrebe za mijenjanjem alata na koje ste navikli.
                     </p>
                 </div>
@@ -512,24 +525,24 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-base font-semibold theme-text-primary mb-2.5">Automatizacija korisničkih upita</h3>
-                            <p class="text-sm theme-text-secondary leading-relaxed mb-4">
+                            <h3 data-i18n="sol1_title" class="text-base font-semibold theme-text-primary mb-2.5">Automatizacija korisničkih upita</h3>
+                            <p data-i18n="sol1_desc" class="text-sm theme-text-secondary leading-relaxed mb-4">
                                 Sustav prepoznaje namjeru upita (cijene, dostupnost, uvjeti suradnje), pronalazi točan podatak u vašim cjenicima ili uputama i priprema jasan odgovor.
                             </p>
                             <ul class="space-y-2 text-xs theme-text-secondary">
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Odgovori temeljeni isključivo na vašim podacima</span>
+                                    <span data-i18n="sol1_b1">Odgovori temeljeni isključivo na vašim podacima</span>
                                 </li>
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Prosljeđivanje složenih upita odgovornoj osobi</span>
+                                    <span data-i18n="sol1_b2">Prosljeđivanje složenih upita odgovornoj osobi</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="mt-6 pt-4 border-t theme-border flex items-center justify-between text-xs font-mono theme-text-muted">
-                            <span>Web &bull; E-mail &bull; Chat</span>
-                            <span>24/7 prijem</span>
+                            <span data-i18n="sol1_f1">Web &bull; E-mail &bull; Chat</span>
+                            <span data-i18n="sol1_f2">24/7 prijem</span>
                         </div>
                     </article>
 
@@ -541,24 +554,24 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-base font-semibold theme-text-primary mb-2.5">Dogovaranje i usklađivanje termina</h3>
-                            <p class="text-sm theme-text-secondary leading-relaxed mb-4">
+                            <h3 data-i18n="sol2_title" class="text-base font-semibold theme-text-primary mb-2.5">Dogovaranje i usklađivanje termina</h3>
+                            <p data-i18n="sol2_desc" class="text-sm theme-text-secondary leading-relaxed mb-4">
                                 Uklanja višestruku razmjenu poruka oko slobodnih sati. Asistent provjerava zauzetost kalendara, predlaže slobodne termine i automatski bilježi potvrđeni sastanak.
                             </p>
                             <ul class="space-y-2 text-xs theme-text-secondary">
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Poštivanje radnog vremena i pauza između sastanaka</span>
+                                    <span data-i18n="sol2_b1">Poštivanje radnog vremena i pauza između sastanaka</span>
                                 </li>
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Automatsko slanje podsjetnika i izmjena termina</span>
+                                    <span data-i18n="sol2_b2">Automatsko slanje podsjetnika i izmjena termina</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="mt-6 pt-4 border-t theme-border flex items-center justify-between text-xs font-mono theme-text-muted">
-                            <span>Google Calendar &bull; Outlook</span>
-                            <span>Bez preklapanja</span>
+                            <span data-i18n="sol2_f1">Google Calendar &bull; Outlook</span>
+                            <span data-i18n="sol2_f2">Bez preklapanja</span>
                         </div>
                     </article>
 
@@ -570,24 +583,24 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-base font-semibold theme-text-primary mb-2.5">E-mail automatizacija i trijaža</h3>
-                            <p class="text-sm theme-text-secondary leading-relaxed mb-4">
+                            <h3 data-i18n="sol3_title" class="text-base font-semibold theme-text-primary mb-2.5">E-mail automatizacija i trijaža</h3>
+                            <p data-i18n="sol3_desc" class="text-sm theme-text-secondary leading-relaxed mb-4">
                                 Pristigle poruke automatski se razvrstavaju po hitnosti i temi, sažimaju se ključni podaci pošiljatelja, a u sandučiću vas čeka pripremljen nacrt odgovora.
                             </p>
                             <ul class="space-y-2 text-xs theme-text-secondary">
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Razvrstavanje upita, ponuda, računa i reklamacija</span>
+                                    <span data-i18n="sol3_b1">Razvrstavanje upita, ponuda, računa i reklamacija</span>
                                 </li>
                                 <li class="flex items-center space-x-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                                    <span>Podsjetnik za poruke na koje nije odgovoreno</span>
+                                    <span data-i18n="sol3_b2">Podsjetnik za poruke na koje nije odgovoreno</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="mt-6 pt-4 border-t theme-border flex items-center justify-between text-xs font-mono theme-text-muted">
-                            <span>Gmail &bull; Microsoft 365</span>
-                            <span>Draft način rada</span>
+                            <span data-i18n="sol3_f1">Gmail &bull; Microsoft 365</span>
+                            <span data-i18n="sol3_f2">Draft način rada</span>
                         </div>
                     </article>
                 </div>
@@ -599,13 +612,13 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     <div class="lg:col-span-5">
-                        <h2 id="pristup-heading" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-4">Postupno i sigurno uvođenje</h2>
-                        <p class="text-sm sm:text-base theme-text-secondary leading-relaxed mb-6">
+                        <h2 id="pristup-heading" data-i18n="approach_title" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-4">Postupno i sigurno uvođenje</h2>
+                        <p data-i18n="approach_subtitle" class="text-sm sm:text-base theme-text-secondary leading-relaxed mb-6">
                             Svaka tvrtka ima vlastiti ton komunikacije i pravila zakazivanja. Zato ne koristimo generičke predloške, već prilagođavamo tokove vašem stvarnom načinu rada.
                         </p>
                         <div class="p-4 rounded-xl theme-surface border text-xs theme-text-secondary leading-relaxed">
-                            <span class="theme-accent-text font-semibold block mb-1">Zaštita poslovne korespondencije</span>
-                            Pristup sandučićima i kalendarima odvija se putem službenih sigurnosnih protokola, a vaši e-mailovi se ne koriste za treniranje javnih modela.
+                            <span data-i18n="privacy_title" class="theme-accent-text font-semibold block mb-1">Zaštita poslovne korespondencije</span>
+                            <span data-i18n="privacy_desc">Pristup sandučićima i kalendarima odvija se putem službenih sigurnosnih protokola, a vaši e-mailovi se ne koriste za treniranje javnih modela.</span>
                         </div>
                     </div>
 
@@ -613,8 +626,8 @@
                         <div class="flex gap-4 p-5 rounded-2xl theme-surface border">
                             <span class="text-xs font-mono font-semibold theme-accent-badge border h-7 w-7 rounded-lg flex items-center justify-center shrink-0">01</span>
                             <div>
-                                <h3 class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Analiza najčešćih upita i kalendara</h3>
-                                <p class="text-sm theme-text-secondary leading-relaxed">
+                                <h3 data-i18n="step1_title" class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Analiza najčešćih upita i kalendara</h3>
+                                <p data-i18n="step1_desc" class="text-sm theme-text-secondary leading-relaxed">
                                     Pregledavamo tipične poruke koje svakodnevno primate i definiramo jasna pravila kada sustav priprema odgovor, a kada odmah obavještava djelatnika.
                                 </p>
                             </div>
@@ -623,8 +636,8 @@
                         <div class="flex gap-4 p-5 rounded-2xl theme-surface border">
                             <span class="text-xs font-mono font-semibold theme-accent-badge border h-7 w-7 rounded-lg flex items-center justify-center shrink-0">02</span>
                             <div>
-                                <h3 class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Probni rad u obliku nacrta</h3>
-                                <p class="text-sm theme-text-secondary leading-relaxed">
+                                <h3 data-i18n="step2_title" class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Probni rad u obliku nacrta</h3>
+                                <p data-i18n="step2_desc" class="text-sm theme-text-secondary leading-relaxed">
                                     Sustav prvo kreira nacrte odgovora i prijedloge termina koje vaš tim pregledava jednim klikom prije slanja klijentu.
                                 </p>
                             </div>
@@ -633,8 +646,8 @@
                         <div class="flex gap-4 p-5 rounded-2xl theme-surface border">
                             <span class="text-xs font-mono font-semibold theme-accent-badge border h-7 w-7 rounded-lg flex items-center justify-center shrink-0">03</span>
                             <div>
-                                <h3 class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Povezivanje s CRM-om i primopredaja</h3>
-                                <p class="text-sm theme-text-secondary leading-relaxed">
+                                <h3 data-i18n="step3_title" class="text-sm sm:text-base font-semibold theme-text-primary mb-1">Povezivanje s CRM-om i primopredaja</h3>
+                                <p data-i18n="step3_desc" class="text-sm theme-text-secondary leading-relaxed">
                                     Dogovoreni termini i sažeci razgovora automatski se zapisuju u vašu evidenciju kontakata, uz kratku obuku za vaš tim.
                                 </p>
                             </div>
@@ -648,8 +661,8 @@
         <section id="pitanja" class="py-16 sm:py-24 border-b theme-border" aria-labelledby="faq-heading">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-10">
-                    <h2 id="faq-heading" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">Česta pitanja o implementaciji</h2>
-                    <p class="theme-text-secondary text-sm sm:text-base leading-relaxed">
+                    <h2 id="faq-heading" data-i18n="faq_title" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-3">Česta pitanja o implementaciji</h2>
+                    <p data-i18n="faq_subtitle" class="theme-text-secondary text-sm sm:text-base leading-relaxed">
                         Kratki odgovori na najčešća tehnička i operativna pitanja prije početka suradnje.
                     </p>
                 </div>
@@ -657,30 +670,30 @@
                 <div class="space-y-3">
                     <details class="group theme-surface border rounded-2xl p-5" open>
                         <summary class="flex items-center justify-between cursor-pointer list-none font-medium text-sm sm:text-base theme-text-primary">
-                            <span>Šalje li AI sustav odgovore klijentima potpuno samostalno bez provjere?</span>
+                            <span data-i18n="faq1_q">Šalje li AI sustav odgovore klijentima potpuno samostalno bez provjere?</span>
                             <span class="theme-accent-text font-mono text-lg transition-transform group-open:rotate-45">+</span>
                         </summary>
-                        <p class="mt-3 text-sm theme-text-secondary leading-relaxed">
+                        <p data-i18n="faq1_a" class="mt-3 text-sm theme-text-secondary leading-relaxed">
                             Ne nužno. Sustav u početnoj fazi radi u načinu pripreme nacrta (draft) u vašem e-mail sandučiću, gdje djelatnik jednim klikom pregledava i šalje odgovor. Tek kada se uvjerite u točnost pravila, rutinski upiti i potvrde termina mogu se slati automatski.
                         </p>
                     </details>
 
                     <details class="group theme-surface border rounded-2xl p-5">
                         <summary class="flex items-center justify-between cursor-pointer list-none font-medium text-sm sm:text-base theme-text-primary">
-                            <span>S kojim kalendarima i e-mail sustavima se CrobotLabs rješenja povezuju?</span>
+                            <span data-i18n="faq2_q">S kojim kalendarima i e-mail sustavima se CrobotLabs rješenja povezuju?</span>
                             <span class="theme-accent-text font-mono text-lg transition-transform group-open:rotate-45">+</span>
                         </summary>
-                        <p class="mt-3 text-sm theme-text-secondary leading-relaxed">
+                        <p data-i18n="faq2_a" class="mt-3 text-sm theme-text-secondary leading-relaxed">
                             Rješenja se izravno povezuju s najčešćim poslovnim alatima uključujući Google Workspace (Gmail, Google Calendar) i Microsoft 365 (Outlook), kao i s web obrascima na vašoj stranici te postojećim CRM sustavima.
                         </p>
                     </details>
 
                     <details class="group theme-surface border rounded-2xl p-5">
                         <summary class="flex items-center justify-between cursor-pointer list-none font-medium text-sm sm:text-base theme-text-primary">
-                            <span>Jesu li poslovni e-mailovi i podaci klijenata zaštićeni?</span>
+                            <span data-i18n="faq3_q">Jesu li poslovni e-mailovi i podaci klijenata zaštićeni?</span>
                             <span class="theme-accent-text font-mono text-lg transition-transform group-open:rotate-45">+</span>
                         </summary>
-                        <p class="mt-3 text-sm theme-text-secondary leading-relaxed">
+                        <p data-i18n="faq3_a" class="mt-3 text-sm theme-text-secondary leading-relaxed">
                             Da. Povezivanje se vrši putem službenih sigurnosnih protokola s minimalno potrebnim ovlastima, a vaša poslovna korespondencija i dokumentacija ne koriste se za treniranje javnih AI modela.
                         </p>
                     </details>
@@ -692,11 +705,11 @@
         <section id="kontakt" class="py-16 sm:py-24" aria-labelledby="kontakt-heading">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="theme-surface border rounded-3xl p-8 sm:p-12 text-center shadow-xl">
-                    <span class="inline-block text-xs font-mono uppercase tracking-widest theme-accent-text mb-3">Izravan kontakt</span>
-                    <h2 id="kontakt-heading" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-4">
+                    <span data-i18n="contact_kicker" class="inline-block text-xs font-mono uppercase tracking-widest theme-accent-text mb-3">Izravan kontakt</span>
+                    <h2 id="kontakt-heading" data-i18n="contact_title" class="text-2xl sm:text-3xl font-semibold theme-text-primary tracking-tight mb-4">
                         Želite rasteretiti e-mail sandučić i kalendar?
                     </h2>
-                    <p class="text-sm sm:text-base theme-text-secondary leading-relaxed max-w-xl mx-auto mb-8">
+                    <p data-i18n="contact_desc" class="text-sm sm:text-base theme-text-secondary leading-relaxed max-w-xl mx-auto mb-8">
                         Pošaljite nam kratak opis kanala koje koristite (npr. Gmail, Outlook, web upiti) i vrste dogovora koje najčešće vodite. Odgovorit ćemo s konkretnim prijedlogom koraka.
                     </p>
 
@@ -707,18 +720,18 @@
                             crobotsystems@gmail.com
                         </a>
                         <div class="flex items-center gap-2 w-full sm:w-auto justify-center">
-                            <a href="mailto:crobotsystems@gmail.com?subject=Upit%20-%20Automatizacija%20upita%20i%20termina" 
+                            <a href="mailto:crobotsystems@gmail.com?subject=Upit%20-%20Automatizacija%20upita%20i%20termina" data-i18n="contact_open_mail"
                                class="px-4 py-2.5 rounded-xl theme-btn-primary text-xs sm:text-sm font-semibold transition-colors">
                                 Otvori e-poštu
                             </a>
-                            <button type="button" id="copy-email-btn" 
+                            <button type="button" id="copy-email-btn" data-i18n="contact_copy_mail"
                                     class="px-4 py-2.5 rounded-xl theme-surface-solid border theme-text-primary text-xs sm:text-sm font-medium hover:opacity-80 transition-opacity">
                                 Kopiraj adresu
                             </button>
                         </div>
                     </div>
 
-                    <p class="text-xs theme-text-muted mt-6">
+                    <p data-i18n="contact_footer_note" class="text-xs theme-text-muted mt-6">
                         Zagreb, Hrvatska &bull; Odgovaramo unutar jednog radnog dana.
                     </p>
                 </div>
@@ -733,7 +746,7 @@
             <div class="flex items-center space-x-2">
                 <span class="font-medium theme-text-primary">CrobotLabs</span>
                 <span>&bull;</span>
-                <span>AI automatizacija upita, termina i e-pošte &bull; Zagreb</span>
+                <span data-i18n="footer_summary">AI automatizacija upita, termina i e-pošte &bull; Zagreb</span>
             </div>
             <div class="flex items-center space-x-4">
                 <a href="mailto:crobotsystems@gmail.com" class="hover:opacity-80 transition-opacity font-mono">crobotsystems@gmail.com</a>
@@ -748,7 +761,7 @@
         <iframe
             id="crobot-call-iframe"
             src="https://script.google.com/macros/s/AKfycbwiVNzUa73r2zq0xxgMOZhA-hpX-7deOLGT3PvD1ISTlKFLc74KR0naZOKXBbe0hWCL/exec"
-            title="Crobot Team — Zakazivanje poziva"
+            title="Crobot Team — Call Scheduling"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
@@ -761,9 +774,371 @@
         <span id="crobot-fab-label">Zakaži poziv</span>
     </button>
 
-    <!-- Skripta za Theme Switcher (Light / Dark AMOLED), D3 grafove i interakciju -->
+    <!-- Skripta za HR/EN prijevod, Theme Switcher (Light / Dark AMOLED), D3 grafove i interakciju -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                hr: {
+                    page_title: 'CrobotLabs | AI Automatizacija Korisničkih Upita, Termina i E-pošte',
+                    meta_description: 'CrobotLabs razvija pouzdane AI asistente za automatizaciju korisničkih upita, dogovaranje sastanaka u kalendaru i trijažu e-pošte za tvrtke u Hrvatskoj. Uredna komunikacija uz ljudski nadzor.',
+                    og_locale: 'hr_HR',
+                    og_title: 'CrobotLabs — Automatizacija korisničkih upita, termina i e-pošte',
+                    og_description: 'Diskretni AI asistenti koji razvrstavaju e-poštu, pripremaju točne odgovore na upite klijenata i usklađuju sastanke s vašim kalendarom.',
+                    twitter_title: 'CrobotLabs — AI Automatizacija Poslovne Komunikacije',
+                    twitter_description: 'Automatizacija korisničkih upita, kalendara i e-mail sandučića bez ručnog prepisivanja, uz potpuni ljudski nadzor.',
+
+                    nav_analysis: 'Usporedba vremena',
+                    nav_solutions: 'Rješenja',
+                    nav_demo: 'Demo',
+                    nav_approach: 'Način rada',
+                    nav_faq: 'Česta pitanja',
+                    nav_contact: 'Kontakt',
+                    nav_contact_email: 'Kontakt putem e-pošte',
+
+                    theme_light: 'Light',
+                    theme_dark: 'Dark',
+
+                    hero_pill: 'AI Automatizacija • Kalendar • E-pošta',
+                    hero_title: 'Uredna komunikacija i dogovaranje termina bez ručnog prepisivanja.',
+                    hero_subtitle: 'CrobotLabs izrađuje diskretne AI asistente koji razvrstavaju pristiglu e-poštu, pripremaju točne odgovore na korisničke upite i usklađuju sastanke s vašim kalendarom — uz potpuni ljudski nadzor.',
+                    hero_cta_primary: 'Zakažite poziv s Crobot timom',
+                    hero_cta_secondary: 'Pogledajte prikaz uštede sati',
+                    hero_k1_label: 'Korisnički upiti',
+                    hero_k1_val: 'Nacrt odgovora spreman za pregled',
+                    hero_k2_label: 'Termini',
+                    hero_k2_val: 'Izravan upis u Google / Outlook',
+                    hero_k3_label: 'E-pošta',
+                    hero_k3_val: 'Automatsko označavanje i sažeci',
+
+                    flow_filename: 'komunikacija_i_termini.flow',
+                    flow_badge: 'Nadzirani rad',
+                    flow_cap_in: 'Ulaz: E-mail / Web obrazac',
+                    flow_cap_out: 'Izlaz: Kalendar & Nacrt odgovora',
+                    flow_nodes: [
+                        { id: 'in1', label: 'E-mail sandučić', sub: 'Novi upit klijenta', type: 'input' },
+                        { id: 'in2', label: 'Web / Poruke', sub: 'Zahtjev za termin', type: 'input' },
+                        { id: 'core', label: 'CrobotLabs AI', sub: 'Trijaža i provjera', type: 'core' },
+                        { id: 'out1', label: 'Kalendar', sub: 'Slobodan termin', type: 'output' },
+                        { id: 'out2', label: 'Nacrt odgovora', sub: 'Potvrda djelatnika', type: 'human' }
+                    ],
+
+                    analysis_title: 'Gdje odlaze sati u svakodnevnoj komunikaciji',
+                    analysis_subtitle: 'Velik dio radnog tjedna troši se na ponavljajuća pitanja, provjeru slobodnih termina i razvrstavanje sandučića. Odaberite proces za prikaz realistične promjene strukture rada.',
+                    sc_inquiries: 'Korisnički upiti',
+                    sc_scheduling: 'Dogovaranje termina',
+                    sc_email: 'E-mail trijaža i praćenje',
+
+                    legend_manual: 'Ručni rad',
+                    legend_ai: 'Uz AI podršku',
+                    bar_footnote: '* Okvirni prikaz temeljen na tipičnim uredskim tokovima.',
+                    bar_unit: 'Jedinica: sati / tjedno',
+
+                    line_title: 'Postupno uhodavanje kroz 8 dana',
+                    line_subtitle: 'Rasterecenje manualnih zadataka',
+                    line_note: 'U prvim danima sustav radi isključivo u načinu pripreme nacrta (draft). Tek kada tim potvrdi točnost pravila, rutinski koraci se automatiziraju.',
+
+                    solutions_title: 'Tri stupa svakodnevne automatizacije',
+                    solutions_subtitle: 'Spajamo se na vaše postojeće kanale komunikacije bez potrebe za mijenjanjem alata na koje ste navikli.',
+                    sol1_title: 'Automatizacija korisničkih upita',
+                    sol1_desc: 'Sustav prepoznaje namjeru upita (cijene, dostupnost, uvjeti suradnje), pronalazi točan podatak u vašim cjenicima ili uputama i priprema jasan odgovor.',
+                    sol1_b1: 'Odgovori temeljeni isključivo na vašim podacima',
+                    sol1_b2: 'Prosljeđivanje složenih upita odgovornoj osobi',
+                    sol1_f1: 'Web • E-mail • Chat',
+                    sol1_f2: '24/7 prijem',
+
+                    sol2_title: 'Dogovaranje i usklađivanje termina',
+                    sol2_desc: 'Uklanja višestruku razmjenu poruka oko slobodnih sati. Asistent provjerava zauzetost kalendara, predlaže slobodne termine i automatski bilježi potvrđeni sastanak.',
+                    sol2_b1: 'Poštivanje radnog vremena i pauza između sastanaka',
+                    sol2_b2: 'Automatsko slanje podsjetnika i izmjena termina',
+                    sol2_f1: 'Google Calendar • Outlook',
+                    sol2_f2: 'Bez preklapanja',
+
+                    sol3_title: 'E-mail automatizacija i trijaža',
+                    sol3_desc: 'Pristigle poruke automatski se razvrstavaju po hitnosti i temi, sažimaju se ključni podaci pošiljatelja, a u sandučiću vas čeka pripremljen nacrt odgovora.',
+                    sol3_b1: 'Razvrstavanje upita, ponuda, računa i reklamacija',
+                    sol3_b2: 'Podsjetnik za poruke na koje nije odgovoreno',
+                    sol3_f1: 'Gmail • Microsoft 365',
+                    sol3_f2: 'Draft način rada',
+
+                    approach_title: 'Postupno i sigurno uvođenje',
+                    approach_subtitle: 'Svaka tvrtka ima vlastiti ton komunikacije i pravila zakazivanja. Zato ne koristimo generičke predloške, već prilagođavamo tokove vašem stvarnom načinu rada.',
+                    privacy_title: 'Zaštita poslovne korespondencije',
+                    privacy_desc: 'Pristup sandučićima i kalendarima odvija se putem službenih sigurnosnih protokola, a vaši e-mailovi se ne koriste za treniranje javnih modela.',
+
+                    step1_title: 'Analiza najčešćih upita i kalendara',
+                    step1_desc: 'Pregledavamo tipične poruke koje svakodnevno primate i definiramo jasna pravila kada sustav priprema odgovor, a kada odmah obavještava djelatnika.',
+                    step2_title: 'Probni rad u obliku nacrta',
+                    step2_desc: 'Sustav prvo kreira nacrte odgovora i prijedloge termina koje vaš tim pregledava jednim klikom prije slanja klijentu.',
+                    step3_title: 'Povezivanje s CRM-om i primopredaja',
+                    step3_desc: 'Dogovoreni termini i sažeci razgovora automatski se zapisuju u vašu evidenciju kontakata, uz kratku obuku za vaš tim.',
+
+                    faq_title: 'Česta pitanja o implementaciji',
+                    faq_subtitle: 'Kratki odgovori na najčešća tehnička i operativna pitanja prije početka suradnje.',
+                    faq1_q: 'Šalje li AI sustav odgovore klijentima potpuno samostalno bez provjere?',
+                    faq1_a: 'Ne nužno. Sustav u početnoj fazi radi u načinu pripreme nacrta (draft) u vašem e-mail sandučiću, gdje djelatnik jednim klikom pregledava i šalje odgovor. Tek kada se uvjerite u točnost pravila, rutinski upiti i potvrde termina mogu se slati automatski.',
+                    faq2_q: 'S kojim kalendarima i e-mail sustavima se CrobotLabs rješenja povezuju?',
+                    faq2_a: 'Rješenja se izravno povezuju s najčešćim poslovnim alatima uključujući Google Workspace (Gmail, Google Calendar) i Microsoft 365 (Outlook), kao i s web obrascima na vašoj stranici te postojećim CRM sustavima.',
+                    faq3_q: 'Jesu li poslovni e-mailovi i podaci klijenata zaštićeni?',
+                    faq3_a: 'Da. Povezivanje se vrši putem službenih sigurnosnih protokola s minimalno potrebnim ovlastima, a vaša poslovna korespondencija i dokumentacija ne koriste se za treniranje javnih AI modela.',
+
+                    contact_kicker: 'Izravan kontakt',
+                    contact_title: 'Želite rasteretiti e-mail sandučić i kalendar?',
+                    contact_desc: 'Pošaljite nam kratak opis kanala koje koristite (npr. Gmail, Outlook, web upiti) i vrste dogovora koje najčešće vodite. Odgovorit ćemo s konkretnim prijedlogom koraka.',
+                    contact_open_mail: 'Otvori e-poštu',
+                    contact_copy_mail: 'Kopiraj adresu',
+                    contact_copied: 'Kopirano!',
+                    contact_footer_note: 'Zagreb, Hrvatska • Odgovaramo unutar jednog radnog dana.',
+
+                    footer_summary: 'AI automatizacija upita, termina i e-pošte • Zagreb',
+
+                    fab_book: 'Zakaži poziv',
+                    fab_close: 'Zatvori',
+
+                    scenarios: {
+                        upiti: {
+                            title: 'Obrada korisničkih upita',
+                            subtitle: 'Raspodjela 16 radnih sati tjedno posvećenih pitanjima klijenata',
+                            bars: [
+                                { task: 'Ponavljajuća pitanja', manual: 7.5, ai: 1.0 },
+                                { task: 'Traženje informacija', manual: 4.5, ai: 1.0 },
+                                { task: 'Specifični slučajevi', manual: 4.0, ai: 1.5 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 90 },
+                                { week: 'D 2', editRate: 64 },
+                                { week: 'D 3', editRate: 44 },
+                                { week: 'D 4', editRate: 30 },
+                                { week: 'D 5', editRate: 22 },
+                                { week: 'D 6', editRate: 17 },
+                                { week: 'D 7', editRate: 14 },
+                                { week: 'D 8', editRate: 12 }
+                            ]
+                        },
+                        termini: {
+                            title: 'Dogovaranje i izmjena termina',
+                            subtitle: 'Raspodjela 10 radnih sati tjedno na organizaciju sastanaka',
+                            bars: [
+                                { task: 'Usklađivanje slobodnih sati', manual: 5.0, ai: 0.5 },
+                                { task: 'Slanje podsjetnika i izmjena', manual: 3.0, ai: 0.5 },
+                                { task: 'Priprema za sastanke', manual: 2.0, ai: 3.0 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 85 },
+                                { week: 'D 2', editRate: 52 },
+                                { week: 'D 3', editRate: 34 },
+                                { week: 'D 4', editRate: 20 },
+                                { week: 'D 5', editRate: 15 },
+                                { week: 'D 6', editRate: 11 },
+                                { week: 'D 7', editRate: 9 },
+                                { week: 'D 8', editRate: 8 }
+                            ]
+                        },
+                        email: {
+                            title: 'E-mail trijaža i priprema odgovora',
+                            subtitle: 'Raspodjela 14 radnih sati tjedno u glavnom sandučiću',
+                            bars: [
+                                { task: 'Razvrstavanje i označavanje', manual: 4.5, ai: 0.5 },
+                                { task: 'Pisanje standardnih odgovora', manual: 6.0, ai: 1.5 },
+                                { task: 'Pregled i slanje nacrta', manual: 3.5, ai: 3.0 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 92 },
+                                { week: 'D 2', editRate: 68 },
+                                { week: 'D 3', editRate: 48 },
+                                { week: 'D 4', editRate: 34 },
+                                { week: 'D 5', editRate: 25 },
+                                { week: 'D 6', editRate: 19 },
+                                { week: 'D 7', editRate: 16 },
+                                { week: 'D 8', editRate: 14 }
+                            ]
+                        }
+                    }
+                },
+                en: {
+                    page_title: 'CrobotLabs | AI Automation for Inquiries, Scheduling & Email',
+                    meta_description: 'CrobotLabs builds reliable AI assistants for automating customer inquiries, calendar scheduling, and email triage. Clean business communication with human oversight.',
+                    og_locale: 'en_US',
+                    og_title: 'CrobotLabs — Inquiry, Scheduling & Email Automation',
+                    og_description: 'Discreet AI assistants that sort incoming email, prepare accurate replies to customer inquiries, and coordinate meetings with your calendar.',
+                    twitter_title: 'CrobotLabs — Business Communication AI Automation',
+                    twitter_description: 'Automate customer inquiries, calendars, and inboxes without manual copy-pasting, with full human oversight.',
+
+                    nav_analysis: 'Time Comparison',
+                    nav_solutions: 'Solutions',
+                    nav_demo: 'Demo',
+                    nav_approach: 'How We Work',
+                    nav_faq: 'FAQ',
+                    nav_contact: 'Contact',
+                    nav_contact_email: 'Contact via Email',
+
+                    theme_light: 'Light',
+                    theme_dark: 'Dark',
+
+                    hero_pill: 'AI Automation • Calendar • Email',
+                    hero_title: 'Clean communication and scheduling without manual copy-pasting.',
+                    hero_subtitle: 'CrobotLabs builds discreet AI assistants that sort incoming email, draft accurate responses to customer inquiries, and sync meetings with your calendar — with full human oversight.',
+                    hero_cta_primary: 'Book a call with Crobot team',
+                    hero_cta_secondary: 'See weekly time savings',
+                    hero_k1_label: 'Customer Inquiries',
+                    hero_k1_val: 'Reply draft ready for review',
+                    hero_k2_label: 'Scheduling',
+                    hero_k2_val: 'Direct sync with Google / Outlook',
+                    hero_k3_label: 'Email',
+                    hero_k3_val: 'Automatic labeling & summaries',
+
+                    flow_filename: 'communication_and_scheduling.flow',
+                    flow_badge: 'Supervised mode',
+                    flow_cap_in: 'Input: Email / Web form',
+                    flow_cap_out: 'Output: Calendar & Reply draft',
+                    flow_nodes: [
+                        { id: 'in1', label: 'Email Inbox', sub: 'New client inquiry', type: 'input' },
+                        { id: 'in2', label: 'Web / Messages', sub: 'Booking request', type: 'input' },
+                        { id: 'core', label: 'CrobotLabs AI', sub: 'Triage & verification', type: 'core' },
+                        { id: 'out1', label: 'Calendar', sub: 'Available slot', type: 'output' },
+                        { id: 'out2', label: 'Reply Draft', sub: 'Staff approval', type: 'human' }
+                    ],
+
+                    analysis_title: 'Where hours go in daily communication',
+                    analysis_subtitle: 'A large share of the workweek goes to repetitive questions, checking open slots, and sorting inboxes. Select a workflow to see a realistic shift in how time is spent.',
+                    sc_inquiries: 'Customer Inquiries',
+                    sc_scheduling: 'Scheduling',
+                    sc_email: 'Email Triage & Follow-up',
+
+                    legend_manual: 'Manual work',
+                    legend_ai: 'With AI support',
+                    bar_footnote: '* Illustrative breakdown based on typical office workflows.',
+                    bar_unit: 'Unit: hours / week',
+
+                    line_title: 'Gradual ramp-up over 8 days',
+                    line_subtitle: 'Reduction in manual editing',
+                    line_note: 'During the first days, the system operates strictly in draft mode. Routine steps are automated only after your team confirms rule accuracy.',
+
+                    solutions_title: 'Three pillars of everyday automation',
+                    solutions_subtitle: 'We connect to your existing communication channels without forcing you to replace the tools your team already uses.',
+                    sol1_title: 'Customer Inquiry Automation',
+                    sol1_desc: 'The system recognizes inquiry intent (pricing, availability, terms), finds accurate details in your price lists or guides, and prepares a clear response.',
+                    sol1_b1: 'Answers grounded strictly in your own data',
+                    sol1_b2: 'Escalation of complex inquiries to the right person',
+                    sol1_f1: 'Web • Email • Chat',
+                    sol1_f2: '24/7 intake',
+
+                    sol2_title: 'Meeting Scheduling & Coordination',
+                    sol2_desc: 'Eliminates back-and-forth messaging over open hours. The assistant checks calendar availability, suggests free slots, and logs confirmed meetings automatically.',
+                    sol2_b1: 'Respects working hours and buffers between meetings',
+                    sol2_b2: 'Automated reminders and rescheduling updates',
+                    sol2_f1: 'Google Calendar • Outlook',
+                    sol2_f2: 'No double-booking',
+
+                    sol3_title: 'Email Automation & Triage',
+                    sol3_desc: 'Incoming messages are automatically sorted by urgency and topic, sender details are summarized, and a prepared reply draft waits in your inbox.',
+                    sol3_b1: 'Sorting inquiries, quotes, invoices, and complaints',
+                    sol3_b2: 'Follow-up reminders for unanswered messages',
+                    sol3_f1: 'Gmail • Microsoft 365',
+                    sol3_f2: 'Draft mode',
+
+                    approach_title: 'Gradual and safe rollout',
+                    approach_subtitle: 'Every business has its own communication tone and scheduling rules. Instead of generic templates, we tailor workflows to how you actually operate.',
+                    privacy_title: 'Business correspondence protection',
+                    privacy_desc: 'Access to inboxes and calendars uses official security protocols with least-privilege scopes, and your emails are never used to train public models.',
+
+                    step1_title: 'Audit of common inquiries and calendars',
+                    step1_desc: 'We review typical messages you receive daily and define clear rules for when the system prepares a draft versus notifying a team member immediately.',
+                    step2_title: 'Pilot phase in draft mode',
+                    step2_desc: 'The system first creates reply drafts and slot suggestions that your team reviews with a single click before sending to the client.',
+                    step3_title: 'CRM connection & handover',
+                    step3_desc: 'Booked meetings and conversation summaries are logged into your contact records automatically, with a short walkthrough for your team.',
+
+                    faq_title: 'Frequently asked questions',
+                    faq_subtitle: 'Short answers to common technical and operational questions before getting started.',
+                    faq1_q: 'Does the AI system send replies to clients completely on its own without review?',
+                    faq1_a: 'Not necessarily. In the initial phase, the system runs in draft mode inside your email client so a team member can review and send with one click. Routine inquiries and booking confirmations can be sent automatically only once you verify rule accuracy.',
+                    faq2_q: 'Which calendars and email platforms does CrobotLabs integrate with?',
+                    faq2_a: 'Solutions connect directly with common business tools including Google Workspace (Gmail, Google Calendar) and Microsoft 365 (Outlook), as well as website forms and existing CRM systems.',
+                    faq3_q: 'Are business emails and client data kept secure?',
+                    faq3_a: 'Yes. Connections use official security protocols with minimal required permissions, and your business correspondence and documents are never used to train public AI models.',
+
+                    contact_kicker: 'Direct contact',
+                    contact_title: 'Want to lighten the load on your inbox and calendar?',
+                    contact_desc: 'Send us a brief note about the channels you use (e.g., Gmail, Outlook, web inquiries) and the types of appointments you schedule most often. We will reply with a practical next step.',
+                    contact_open_mail: 'Open Email',
+                    contact_copy_mail: 'Copy Address',
+                    contact_copied: 'Copied!',
+                    contact_footer_note: 'Zagreb, Croatia • We reply within one business day.',
+
+                    footer_summary: 'Inquiry, scheduling & email AI automation • Zagreb',
+
+                    fab_book: 'Book a call',
+                    fab_close: 'Close',
+
+                    scenarios: {
+                        upiti: {
+                            title: 'Customer Inquiry Handling',
+                            subtitle: 'Breakdown of 16 weekly hours spent on client questions',
+                            bars: [
+                                { task: 'Repeat questions', manual: 7.5, ai: 1.0 },
+                                { task: 'Looking up info', manual: 4.5, ai: 1.0 },
+                                { task: 'Edge cases', manual: 4.0, ai: 1.5 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 90 },
+                                { week: 'D 2', editRate: 64 },
+                                { week: 'D 3', editRate: 44 },
+                                { week: 'D 4', editRate: 30 },
+                                { week: 'D 5', editRate: 22 },
+                                { week: 'D 6', editRate: 17 },
+                                { week: 'D 7', editRate: 14 },
+                                { week: 'D 8', editRate: 12 }
+                            ]
+                        },
+                        termini: {
+                            title: 'Scheduling & Rescheduling',
+                            subtitle: 'Breakdown of 10 weekly hours spent coordinating meetings',
+                            bars: [
+                                { task: 'Matching open slots', manual: 5.0, ai: 0.5 },
+                                { task: 'Reminders & changes', manual: 3.0, ai: 0.5 },
+                                { task: 'Meeting prep', manual: 2.0, ai: 3.0 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 85 },
+                                { week: 'D 2', editRate: 52 },
+                                { week: 'D 3', editRate: 34 },
+                                { week: 'D 4', editRate: 20 },
+                                { week: 'D 5', editRate: 15 },
+                                { week: 'D 6', editRate: 11 },
+                                { week: 'D 7', editRate: 9 },
+                                { week: 'D 8', editRate: 8 }
+                            ]
+                        },
+                        email: {
+                            title: 'Email Triage & Draft Replies',
+                            subtitle: 'Breakdown of 14 weekly hours in the main inbox',
+                            bars: [
+                                { task: 'Sorting & tagging', manual: 4.5, ai: 0.5 },
+                                { task: 'Standard replies', manual: 6.0, ai: 1.5 },
+                                { task: 'Review & send drafts', manual: 3.5, ai: 3.0 }
+                            ],
+                            curve: [
+                                { week: 'D 1', editRate: 92 },
+                                { week: 'D 2', editRate: 68 },
+                                { week: 'D 3', editRate: 48 },
+                                { week: 'D 4', editRate: 34 },
+                                { week: 'D 5', editRate: 25 },
+                                { week: 'D 6', editRate: 19 },
+                                { week: 'D 7', editRate: 16 },
+                                { week: 'D 8', editRate: 14 }
+                            ]
+                        }
+                    }
+                }
+            };
+
+            let currentLang = 'hr';
+            let currentScenario = 'upiti';
+
+            function t() {
+                return translations[currentLang] || translations.hr;
+            }
+
             // Postavljanje trenutne godine
             const yearEl = document.getElementById('year');
             if (yearEl) {
@@ -794,13 +1169,17 @@
             const callFabLabel = document.getElementById('crobot-fab-label');
             const openCallHero = document.getElementById('open-call-from-hero');
 
+            function updateFabLabel() {
+                if (!callFabLabel || !callDrawer) return;
+                const isOpen = callDrawer.classList.contains('open');
+                callFabLabel.textContent = isOpen ? t().fab_close : t().fab_book;
+            }
+
             function setCallDrawerOpen(open) {
                 if (!callDrawer || !callFab) return;
                 callDrawer.classList.toggle('open', open);
                 callFab.setAttribute('aria-expanded', String(open));
-                if (callFabLabel) {
-                    callFabLabel.textContent = open ? 'Zatvori' : 'Zakaži poziv';
-                }
+                updateFabLabel();
             }
 
             if (callFab && callDrawer) {
@@ -825,13 +1204,12 @@
                     tempInput.select();
                     try {
                         document.execCommand('copy');
-                        const originalText = copyBtn.textContent;
-                        copyBtn.textContent = 'Kopirano!';
+                        copyBtn.textContent = t().contact_copied;
                         setTimeout(() => {
-                            copyBtn.textContent = originalText;
+                            copyBtn.textContent = t().contact_copy_mail;
                         }, 2000);
                     } catch (err) {
-                        console.error('Kopiranje nije uspjelo', err);
+                        console.error('Copy failed', err);
                     }
                     document.body.removeChild(tempInput);
                 });
@@ -854,69 +1232,6 @@
                 };
             }
 
-            // Podaci za interaktivne D3 grafove
-            const scenarioData = {
-                upiti: {
-                    title: 'Obrada korisničkih upita',
-                    subtitle: 'Raspodjela 16 radnih sati tjedno posvećenih pitanjima klijenata',
-                    bars: [
-                        { task: 'Ponavljajuća pitanja', manual: 7.5, ai: 1.0 },
-                        { task: 'Traženje informacija', manual: 4.5, ai: 1.0 },
-                        { task: 'Specifični slučajevi', manual: 4.0, ai: 1.5 }
-                    ],
-                    curve: [
-                        { week: 'D 1', editRate: 90 },
-                        { week: 'D 2', editRate: 64 },
-                        { week: 'D 3', editRate: 44 },
-                        { week: 'D 4', editRate: 30 },
-                        { week: 'D 5', editRate: 22 },
-                        { week: 'D 6', editRate: 17 },
-                        { week: 'D 7', editRate: 14 },
-                        { week: 'D 8', editRate: 12 }
-                    ]
-                },
-                termini: {
-                    title: 'Dogovaranje i izmjena termina',
-                    subtitle: 'Raspodjela 10 radnih sati tjedno na organizaciju sastanaka',
-                    bars: [
-                        { task: 'Usklađivanje slobodnih sati', manual: 5.0, ai: 0.5 },
-                        { task: 'Slanje podsjetnika i izmjena', manual: 3.0, ai: 0.5 },
-                        { task: 'Priprema za sastanke', manual: 2.0, ai: 3.0 }
-                    ],
-                    curve: [
-                        { week: 'Tj 1', editRate: 85 },
-                        { week: 'Tj 2', editRate: 52 },
-                        { week: 'Tj 3', editRate: 34 },
-                        { week: 'Tj 4', editRate: 20 },
-                        { week: 'Tj 5', editRate: 15 },
-                        { week: 'Tj 6', editRate: 11 },
-                        { week: 'Tj 7', editRate: 9 },
-                        { week: 'Tj 8', editRate: 8 }
-                    ]
-                },
-                email: {
-                    title: 'E-mail trijaža i priprema odgovora',
-                    subtitle: 'Raspodjela 14 radnih sati tjedno u glavnom sandučiću',
-                    bars: [
-                        { task: 'Razvrstavanje i označavanje', manual: 4.5, ai: 0.5 },
-                        { task: 'Pisanje standardnih odgovora', manual: 6.0, ai: 1.5 },
-                        { task: 'Pregled i slanje nacrta', manual: 3.5, ai: 3.0 }
-                    ],
-                    curve: [
-                        { week: 'Tj 1', editRate: 92 },
-                        { week: 'Tj 2', editRate: 68 },
-                        { week: 'Tj 3', editRate: 48 },
-                        { week: 'Tj 4', editRate: 34 },
-                        { week: 'Tj 5', editRate: 25 },
-                        { week: 'Tj 6', editRate: 19 },
-                        { week: 'Tj 7', editRate: 16 },
-                        { week: 'Tj 8', editRate: 14 }
-                    ]
-                }
-            };
-
-            let currentScenario = 'upiti';
-
             // 1. D3 Dijagram toka u Hero sekciji
             function renderFlowChart() {
                 const container = document.getElementById('flow-chart-container');
@@ -930,6 +1245,7 @@
                 if (width <= 0 || height <= 0) return;
 
                 const colors = getThemeColors();
+                const localizedNodes = t().flow_nodes;
 
                 const svg = d3.select(container)
                     .append('svg')
@@ -937,13 +1253,19 @@
                     .attr('height', '100%')
                     .attr('viewBox', `0 0 ${width} ${height}`);
 
-                const nodes = [
-                    { id: 'in1', label: 'E-mail sandučić', sub: 'Novi upit klijenta', x: width * 0.2, y: height * 0.28, type: 'input' },
-                    { id: 'in2', label: 'Web / Poruke', sub: 'Zahtjev za termin', x: width * 0.2, y: height * 0.72, type: 'input' },
-                    { id: 'core', label: 'CrobotLabs AI', sub: 'Trijaža i provjera', x: width * 0.52, y: height * 0.5, type: 'core' },
-                    { id: 'out1', label: 'Kalendar', sub: 'Slobodan termin', x: width * 0.83, y: height * 0.28, type: 'output' },
-                    { id: 'out2', label: 'Nacrt odgovora', sub: 'Potvrda djelatnika', x: width * 0.83, y: height * 0.72, type: 'human' }
+                const positions = [
+                    { x: width * 0.2, y: height * 0.28 },
+                    { x: width * 0.2, y: height * 0.72 },
+                    { x: width * 0.52, y: height * 0.5 },
+                    { x: width * 0.83, y: height * 0.28 },
+                    { x: width * 0.83, y: height * 0.72 }
                 ];
+
+                const nodes = localizedNodes.map((n, i) => ({
+                    ...n,
+                    x: positions[i].x,
+                    y: positions[i].y
+                }));
 
                 const links = [
                     { source: nodes[0], target: nodes[2] },
@@ -1008,7 +1330,7 @@
                     .append('g')
                     .attr('transform', d => `translate(${d.x}, ${d.y})`);
 
-                const boxW = width < 400 ? 102 : 124;
+                const boxW = width < 400 ? 104 : 128;
                 const boxH = 48;
 
                 nodeGroups.append('rect')
@@ -1044,9 +1366,11 @@
                 container.innerHTML = '';
 
                 const colors = getThemeColors();
-                const dataObj = scenarioData[scenarioKey];
-                document.getElementById('bar-chart-title').textContent = dataObj.title;
-                document.getElementById('bar-chart-subtitle').textContent = dataObj.subtitle;
+                const dataObj = t().scenarios[scenarioKey];
+                const titleEl = document.getElementById('bar-chart-title');
+                const subtitleEl = document.getElementById('bar-chart-subtitle');
+                if (titleEl) titleEl.textContent = dataObj.title;
+                if (subtitleEl) subtitleEl.textContent = dataObj.subtitle;
 
                 const data = dataObj.bars;
                 const margin = { top: 18, right: 20, bottom: 45, left: 36 };
@@ -1154,7 +1478,7 @@
                 container.innerHTML = '';
 
                 const colors = getThemeColors();
-                const data = scenarioData[scenarioKey].curve;
+                const data = t().scenarios[scenarioKey].curve;
                 const margin = { top: 18, right: 16, bottom: 35, left: 38 };
                 const width = (container.clientWidth || 380) - margin.left - margin.right;
                 const height = (container.clientHeight || 250) - margin.top - margin.bottom;
@@ -1246,6 +1570,71 @@
                 renderLineChart(currentScenario);
             }
 
+            // Primjena prijevoda na DOM elemente i meta oznake
+            function applyTranslations() {
+                const dict = t();
+                document.documentElement.setAttribute('lang', currentLang);
+                document.title = dict.page_title;
+
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.setAttribute('content', dict.meta_description);
+
+                const ogLocale = document.querySelector('meta[property="og:locale"]');
+                if (ogLocale) ogLocale.setAttribute('content', dict.og_locale);
+
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                if (ogTitle) ogTitle.setAttribute('content', dict.og_title);
+
+                const ogDesc = document.querySelector('meta[property="og:description"]');
+                if (ogDesc) ogDesc.setAttribute('content', dict.og_description);
+
+                const twTitle = document.querySelector('meta[name="twitter:title"]');
+                if (twTitle) twTitle.setAttribute('content', dict.twitter_title);
+
+                const twDesc = document.querySelector('meta[name="twitter:description"]');
+                if (twDesc) twDesc.setAttribute('content', dict.twitter_description);
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (key && dict[key] !== undefined) {
+                        el.textContent = dict[key];
+                    }
+                });
+
+                updateFabLabel();
+            }
+
+            // Upravljanje jezikom (HR / EN)
+            const langBtns = document.querySelectorAll('.lang-switch-btn');
+
+            function setLanguage(langCode) {
+                currentLang = langCode === 'en' ? 'en' : 'hr';
+                try {
+                    localStorage.setItem('crobotlabs-lang', currentLang);
+                } catch (e) {}
+
+                langBtns.forEach(btn => {
+                    const active = btn.getAttribute('data-lang-choice') === currentLang;
+                    if (active) {
+                        btn.classList.add('theme-accent-badge', 'shadow-sm');
+                        btn.classList.remove('theme-text-secondary');
+                    } else {
+                        btn.classList.remove('theme-accent-badge', 'shadow-sm');
+                        btn.classList.add('theme-text-secondary');
+                    }
+                });
+
+                applyTranslations();
+                renderAllCharts();
+            }
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const chosen = btn.getAttribute('data-lang-choice');
+                    if (chosen) setLanguage(chosen);
+                });
+            });
+
             // Upravljanje stilom aktivnog gumba za scenarije
             const scenarioBtns = document.querySelectorAll('.scenario-btn');
             function updateScenarioButtons() {
@@ -1307,17 +1696,36 @@
                 });
             });
 
-            // Učitavanje spremljene teme (zadano 'dark' tj. čista crna AMOLED tema)
+            // Učitavanje spremljene teme i jezika
             let savedTheme = 'dark';
+            let savedLang = 'hr';
             try {
-                const stored = localStorage.getItem('crobotlabs-theme');
-                if (stored === 'light' || stored === 'dark') {
-                    savedTheme = stored;
+                const storedTheme = localStorage.getItem('crobotlabs-theme');
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    savedTheme = storedTheme;
+                }
+                const storedLang = localStorage.getItem('crobotlabs-lang');
+                if (storedLang === 'hr' || storedLang === 'en') {
+                    savedLang = storedLang;
                 }
             } catch (e) {}
 
             updateScenarioButtons();
-            setTheme(savedTheme);
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeBtns.forEach(btn => {
+                const active = btn.getAttribute('data-theme-choice') === savedTheme;
+                if (active) {
+                    btn.classList.add('theme-accent-badge', 'shadow-sm');
+                    btn.classList.remove('theme-text-secondary');
+                } else {
+                    btn.classList.remove('theme-accent-badge', 'shadow-sm');
+                    btn.classList.add('theme-text-secondary');
+                }
+            });
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute('content', savedTheme === 'light' ? '#f8fafc' : '#000000');
+            }
+            setLanguage(savedLang);
 
             // Prilagodba grafova pri promjeni veličine prozora
             let resizeTimer;
