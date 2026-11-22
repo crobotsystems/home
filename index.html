@@ -227,6 +227,61 @@
             background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
             background-size: 26px 26px;
         }
+
+        /* Plutajući iframe chatbot widget */
+        #crobot-call-fab {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 50;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 9999px;
+            background-color: var(--accent);
+            color: #ffffff;
+            border: 1px solid var(--accent-border);
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transition: transform 0.15s ease, background-color 0.2s ease;
+        }
+
+        [data-theme="dark"] #crobot-call-fab {
+            color: #042f2e;
+        }
+
+        #crobot-call-fab:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        #crobot-call-drawer {
+            display: none;
+            position: fixed;
+            right: 20px;
+            bottom: 76px;
+            z-index: 50;
+            width: min(390px, calc(100vw - 32px));
+            height: 550px;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--bg-surface-solid);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        #crobot-call-drawer.open {
+            display: block;
+        }
+
+        #crobot-call-drawer iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-teal-500/30 flex flex-col min-h-screen relative overflow-x-hidden">
@@ -316,10 +371,10 @@
                             CrobotLabs izrađuje diskretne AI asistente koji razvrstavaju pristiglu e-poštu, pripremaju točne odgovore na korisničke upite i usklađuju sastanke s vašim kalendarom — uz potpuni ljudski nadzor.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3.5">
-                            <a href="mailto:crobotsystems@gmail.com?subject=Upit%20-%20Automatizacija%20komunikacije%20i%20termina" 
+                            <button type="button" id="open-call-from-hero"
                                class="inline-flex justify-center items-center px-5 py-3 rounded-xl theme-btn-primary text-sm font-semibold transition-all shadow-sm">
-                                Pošaljite upit na e-mail
-                            </a>
+                                Zakažite poziv s Crobot timom
+                            </button>
                             <a href="#analiza" 
                                class="inline-flex justify-center items-center px-5 py-3 rounded-xl theme-surface border theme-text-primary text-sm font-medium hover:opacity-85 transition-opacity">
                                 Pogledajte prikaz uštede sati
@@ -353,7 +408,7 @@
                                     <span class="w-2.5 h-2.5 rounded-full bg-zinc-600/50"></span>
                                     <span class="text-xs font-mono theme-text-muted pl-2">komunikacija_i_termini.flow</span>
                                 </div>
-                                <span class="text-xs font-mono theme-accent-badge border px-2 py-0.5 rounded">Data Flow</span>
+                                <span class="text-xs font-mono theme-accent-badge border px-2 py-0.5 rounded">Nadzirani rad</span>
                             </div>
                             <!-- D3 SVG kontejner -->
                             <div id="flow-chart-container" class="w-full h-64 sm:h-72" role="img" aria-label="Dijagram toka AI automatizacije od ulaznog e-maila i web upita do prijedloga termina u kalendaru i nacrta odgovora"></div>
@@ -688,6 +743,24 @@
         </div>
     </footer>
 
+    <!-- Plutajući iframe chatbot widget -->
+    <div id="crobot-call-drawer" role="dialog" aria-label="Zakazivanje poziva s Crobot timom">
+        <iframe
+            id="crobot-call-iframe"
+            src="https://script.google.com/macros/s/AKfycbwM_LRisHy1QqTnCvL8W9u8QzHUAdXIJ84qiFbk9dbwI55odjpoHa1Nq1yy--NEWkKx/exec"
+            title="Crobot Team — Zakazivanje poziva"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <button id="crobot-call-fab" type="button" aria-expanded="false" aria-controls="crobot-call-drawer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span id="crobot-fab-label">Zakaži poziv</span>
+    </button>
+
     <!-- Skripta za Theme Switcher (Light / Dark AMOLED), D3 grafove i interakciju -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -712,6 +785,33 @@
                         mobileMenu.classList.add('hidden');
                         mobileBtn.setAttribute('aria-expanded', 'false');
                     });
+                });
+            }
+
+            // Upravljanje iframe prozorom za zakazivanje poziva
+            const callFab = document.getElementById('crobot-call-fab');
+            const callDrawer = document.getElementById('crobot-call-drawer');
+            const callFabLabel = document.getElementById('crobot-fab-label');
+            const openCallHero = document.getElementById('open-call-from-hero');
+
+            function setCallDrawerOpen(open) {
+                if (!callDrawer || !callFab) return;
+                callDrawer.classList.toggle('open', open);
+                callFab.setAttribute('aria-expanded', String(open));
+                if (callFabLabel) {
+                    callFabLabel.textContent = open ? 'Zatvori' : 'Zakaži poziv';
+                }
+            }
+
+            if (callFab && callDrawer) {
+                callFab.addEventListener('click', () => {
+                    setCallDrawerOpen(!callDrawer.classList.contains('open'));
+                });
+            }
+
+            if (openCallHero) {
+                openCallHero.addEventListener('click', () => {
+                    setCallDrawerOpen(true);
                 });
             }
 
@@ -762,7 +862,7 @@
                     bars: [
                         { task: 'Ponavljajuća pitanja', manual: 7.5, ai: 1.0 },
                         { task: 'Traženje informacija', manual: 4.5, ai: 1.0 },
-                        { task: 'Specifični slučajevi', manual: 4.0, ai: 1.5 }
+                        { task: 'Specifični slučajevi', manual: 4.0, ai: 2.5 }
                     ],
                     curve: [
                         { week: 'Tj 1', editRate: 90 },
