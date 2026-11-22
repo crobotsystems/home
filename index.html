@@ -309,7 +309,7 @@
             <nav aria-label="Glavna navigacija" class="hidden lg:flex items-center space-x-7 text-sm font-medium theme-text-secondary">
                 <a href="#analiza" class="hover:opacity-80 transition-opacity">Usporedba vremena</a>
                 <a href="#podrucja" class="hover:opacity-80 transition-opacity">Rješenja</a>
-                <a href="#pristup" class="hover:opacity-80 transition-opacity">Način rada</a>
+                <a href="https://crobotsystems.github.io/home/ava.html" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">Demo</a>
                 <a href="#pitanja" class="hover:opacity-80 transition-opacity">Česta pitanja</a>
                 <a href="#kontakt" class="hover:opacity-80 transition-opacity">Kontakt</a>
             </nav>
@@ -480,13 +480,13 @@
                     <article class="lg:col-span-5 theme-surface border rounded-2xl p-6 flex flex-col justify-between shadow-sm">
                         <div>
                             <div class="mb-6">
-                                <h3 class="text-base font-semibold theme-text-primary">Postupno uhodavanje kroz 8 tjedana</h3>
-                                <p class="text-xs theme-text-secondary mt-0.5">Udio prijedloga koji zahtijevaju dodatnu doradu</p>
+                                <h3 class="text-base font-semibold theme-text-primary">Postupno uhodavanje kroz 8 dana</h3>
+                                <p class="text-xs theme-text-secondary mt-0.5">Rasterecenje manualnih zadataka</p>
                             </div>
-                            <div id="line-chart-container" class="w-full h-64" role="img" aria-label="Linijski grafikon smanjenja potrebe za ručnom doradom AI prijedloga tijekom osam tjedana"></div>
+                            <div id="line-chart-container" class="w-full h-64" role="img" aria-label="Linijski grafikon smanjenja potrebe za ručnom doradom AI prijedloga tijekom osam dana"></div>
                         </div>
                         <div class="mt-4 pt-4 border-t theme-border text-xs theme-text-secondary leading-relaxed">
-                            U prvim tjednima sustav radi isključivo u načinu pripreme nacrta (draft). Tek kada tim potvrdi točnost pravila, rutinski koraci se automatiziraju.
+                            U prvim danima sustav radi isključivo u načinu pripreme nacrta (draft). Tek kada tim potvrdi točnost pravila, rutinski koraci se automatiziraju.
                         </div>
                     </article>
                 </div>
@@ -862,17 +862,17 @@
                     bars: [
                         { task: 'Ponavljajuća pitanja', manual: 7.5, ai: 1.0 },
                         { task: 'Traženje informacija', manual: 4.5, ai: 1.0 },
-                        { task: 'Specifični slučajevi', manual: 4.0, ai: 2.5 }
+                        { task: 'Specifični slučajevi', manual: 4.0, ai: 1.5 }
                     ],
                     curve: [
-                        { week: 'Tj 1', editRate: 90 },
-                        { week: 'Tj 2', editRate: 64 },
-                        { week: 'Tj 3', editRate: 44 },
-                        { week: 'Tj 4', editRate: 30 },
-                        { week: 'Tj 5', editRate: 22 },
-                        { week: 'Tj 6', editRate: 17 },
-                        { week: 'Tj 7', editRate: 14 },
-                        { week: 'Tj 8', editRate: 12 }
+                        { week: 'D 1', editRate: 90 },
+                        { week: 'D 2', editRate: 64 },
+                        { week: 'D 3', editRate: 44 },
+                        { week: 'D 4', editRate: 30 },
+                        { week: 'D 5', editRate: 22 },
+                        { week: 'D 6', editRate: 17 },
+                        { week: 'D 7', editRate: 14 },
+                        { week: 'D 8', editRate: 12 }
                     ]
                 },
                 termini: {
