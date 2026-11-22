@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrobotLabs | AI Automatizacija Korisničkih Upita, Termina i E-pošte</title>
 
-    <!-- Favicon (SVG data URI u stilu CrobotLabs logotipa) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23041f22'/%3E%3Crect x='1' y='1' width='30' height='30' rx='7' fill='none' stroke='%2314b8a6' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Cpath d='M10 12h.01M16 12h.01M22 12h.01M11 18H8a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2v7a2 2 0 01-2 2h-6l-4 4v-4z' fill='none' stroke='%235eead4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#041f22"/><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="#14b8a6" stroke-opacity="0.55" stroke-width="1.5"/><path d="M10 12h.01M16 12h.01M22 12h.01M11 18H8a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2v7a2 2 0 01-2 2h-6l-4 4v-4z" fill="none" stroke="#5eead4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'>
     
     <!-- Osnovne SEO meta oznake -->
     <meta name="description" content="CrobotLabs razvija pouzdane AI asistente za automatizaciju korisničkih upita, dogovaranje sastanaka u kalendaru i trijažu e-pošte za tvrtke u Hrvatskoj. Uredna komunikacija uz ljudski nadzor.">
@@ -1196,22 +1196,44 @@
 
             // Kopiranje e-mail adrese
             const copyBtn = document.getElementById('copy-email-btn');
+            let copyTimeoutId = null;
             if (copyBtn) {
-                copyBtn.addEventListener('click', () => {
-                    const tempInput = document.createElement('input');
-                    tempInput.value = 'crobotsystems@gmail.com';
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    try {
-                        document.execCommand('copy');
+                copyBtn.addEventListener('click', async () => {
+                    const emailAddr = 'crobotsystems@gmail.com';
+                    let copied = false;
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        try {
+                            await navigator.clipboard.writeText(emailAddr);
+                            copied = true;
+                        } catch (_) {
+                            copied = false;
+                        }
+                    }
+
+                    if (!copied) {
+                        const tempArea = document.createElement('textarea');
+                        tempArea.value = emailAddr;
+                        tempArea.setAttribute('readonly', '');
+                        tempArea.style.position = 'fixed';
+                        tempArea.style.left = '-9999px';
+                        document.body.appendChild(tempArea);
+                        tempArea.select();
+                        try {
+                            copied = document.execCommand('copy');
+                        } catch (_) {
+                            copied = false;
+                        }
+                        document.body.removeChild(tempArea);
+                    }
+
+                    if (copied) {
                         copyBtn.textContent = t().contact_copied;
-                        setTimeout(() => {
+                        if (copyTimeoutId) clearTimeout(copyTimeoutId);
+                        copyTimeoutId = setTimeout(() => {
                             copyBtn.textContent = t().contact_copy_mail;
                         }, 2000);
-                    } catch (err) {
-                        console.error('Copy failed', err);
                     }
-                    document.body.removeChild(tempInput);
                 });
             }
 
@@ -1307,13 +1329,13 @@
                             .duration(2200)
                             .ease(d3.easeLinear)
                             .attrTween('transform', function() {
-                                return function(t) {
+                                return function(step) {
                                     if (!pathNode || !document.body.contains(pathNode)) {
                                         return 'translate(0,0)';
                                     }
                                     try {
-                                        const p = pathNode.getPointAtLength(t * length);
-                                        return `translate(${p.x},${p.y})`;
+                                        const pt = pathNode.getPointAtLength(step * length);
+                                        return `translate(${pt.x},${pt.y})`;
                                     } catch (e) {
                                         return 'translate(0,0)';
                                     }
@@ -1565,9 +1587,13 @@
             }
 
             function renderAllCharts() {
-                renderFlowChart();
-                renderBarChart(currentScenario);
-                renderLineChart(currentScenario);
+                try {
+                    renderFlowChart();
+                    renderBarChart(currentScenario);
+                    renderLineChart(currentScenario);
+                } catch (err) {
+                    console.error('Chart rendering error:', err);
+                }
             }
 
             // Primjena prijevoda na DOM elemente i meta oznake
@@ -1611,7 +1637,7 @@
                 currentLang = langCode === 'en' ? 'en' : 'hr';
                 try {
                     localStorage.setItem('crobotlabs-lang', currentLang);
-                } catch (e) {}
+                } catch (_) {}
 
                 langBtns.forEach(btn => {
                     const active = btn.getAttribute('data-lang-choice') === currentLang;
@@ -1673,7 +1699,7 @@
                 }
                 try {
                     localStorage.setItem('crobotlabs-theme', validTheme);
-                } catch (e) {}
+                } catch (_) {}
 
                 themeBtns.forEach(btn => {
                     const active = btn.getAttribute('data-theme-choice') === validTheme;
@@ -1708,7 +1734,7 @@
                 if (storedLang === 'hr' || storedLang === 'en') {
                     savedLang = storedLang;
                 }
-            } catch (e) {}
+            } catch (_) {}
 
             updateScenarioButtons();
             document.documentElement.setAttribute('data-theme', savedTheme);
